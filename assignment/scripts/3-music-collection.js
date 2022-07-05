@@ -25,7 +25,7 @@ console.log(collection);
 //Test the `addToCollection` function:
 console.log(addToCollection("The White Album", "The Beatles", 1968));
 console.log(addToCollection("Harvest", "Neil Young", 1972));
-console.log(addToCollection("Jason Isbell", "Southeastern", 2013));
+console.log(addToCollection("Let It Be", "The Beatles", 1970));
 console.log(
   addToCollection("Car Wheels on a Gravel Road", "Lucinda Williams", 1998)
 );
@@ -36,7 +36,7 @@ console.log(
 
 console.log(collection);
 
-//
+// Write showCollection function
 showCollection = (array) => {
   console.log(array.length);
   for (let item of array) {
@@ -47,3 +47,18 @@ showCollection = (array) => {
 };
 
 showCollection(collection);
+
+//write findByArtist function
+
+findByArtist = (artist) => {
+  let results = [];
+  for (let item of collection) {
+    if (item.artist === artist) {
+      results.push(item);
+    }
+  }
+  return results;
+};
+
+console.log(findByArtist("The Beatles"));
+console.log(findByArtist("Otis Redding"));
