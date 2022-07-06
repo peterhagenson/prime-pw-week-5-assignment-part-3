@@ -3,11 +3,11 @@ console.log("***** Music Collection *****");
 //Add a function named `addToCollection."
 let collection = [];
 
-addToCollection = (title, artist, yearPublished) => {
+addToCollection = (title, artist, year) => {
   let album = {
     title: title,
     artist: artist,
-    published: yearPublished,
+    year: year,
   };
   collection.push(album);
   return collection[collection.length - 1];
@@ -40,9 +40,7 @@ console.log(collection);
 showCollection = (array) => {
   console.log(array.length);
   for (let item of array) {
-    console.log(
-      `${item.title} by ${item.artist} published in ${item.published}`
-    );
+    console.log(`${item.title} by ${item.artist} published in ${item.year}`);
   }
 };
 
@@ -62,3 +60,19 @@ findByArtist = (artist) => {
 
 console.log(findByArtist("The Beatles"));
 console.log(findByArtist("Otis Redding"));
+
+//stretch goals
+
+search = (input) => {
+  let matches = [];
+  for (let item of collection) {
+    if (item.title === input || item.artist === input || item.year === input) {
+      matches.push(item);
+    } else if (input === undefined) {
+      return collection;
+    }
+  }
+  return matches;
+};
+
+console.log(search("The Beatles"));
