@@ -21,19 +21,15 @@ console.log(
     "Derek and the Dominos",
     1971,
     [
-      { number: "1.", name: "I Looked Away", duration: "3:07" },
-      { number: "2.", name: "Bell Bottom Blues", duration: "5:03" },
-      { number: "3.", name: "Keep On Growing", duration: "6:23" },
-      { number: "4.", name: "Nobody Knows You", duration: "4:58" },
-      { number: "5.", name: "I Am Yours", duration: "3:37" },
-      { number: "6.", name: "Anyday", duration: "6:37" },
-      { number: "7.", name: "Key to the Highway", duration: "9:41" },
-      { number: "8.", name: "Tell the Truth", duration: "6:40" },
-      {
-        number: "9.",
-        name: "Why Does Love Got to Be So Sad?",
-        duration: "4:44",
-      },
+      { name: "I Looked Away", duration: "3:07" },
+      { name: "Bell Bottom Blues", duration: "5:03" },
+      { name: "Keep On Growing", duration: "6:23" },
+      { name: "Nobody Knows You", duration: "4:58" },
+      { name: "I Am Yours", duration: "3:37" },
+      { name: "Anyday", duration: "6:37" },
+      { name: "Key to the Highway", duration: "9:41" },
+      { name: "Tell the Truth", duration: "6:40" },
+      { name: "Why Does Love Got to Be So Sad?", duration: "4:44" },
     ]
   )
 );
@@ -80,21 +76,27 @@ console.log(findByArtist("Otis Redding"));
 
 //stretch goals
 
-search = (searchTerm) => {
+search = (searchObject) => {
   let matches = [];
-  for (let item of collection) {
-    if (
-      item.title === searchTerm ||
-      item.artist === searchTerm ||
-      item.year === searchTerm
-    ) {
-      matches.push(item);
-    } else if (searchTerm === undefined) {
+
+  if (searchObject) {
+    if (searchObject.artist === undefined || searchObject.year === undefined) {
       return collection;
     }
+
+    for (let item of collection) {
+      if (
+        item.artist === searchObject.artist &&
+        item.year === searchObject.year
+      ) {
+        matches.push(item);
+      }
+    }
+    return matches;
+  } else {
+    return collection;
   }
-  return matches;
 };
 
+console.log(search({ artist: "The Beatles", year: 1970 }));
 console.log(search());
-console.log(search(1989));
