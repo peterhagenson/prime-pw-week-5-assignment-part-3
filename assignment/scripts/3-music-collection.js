@@ -50,10 +50,19 @@ console.log(
 console.log(collection);
 
 // Write showCollection function
-showCollection = (array) => {
-  console.log(array.length);
-  for (let item of array) {
-    console.log(`${item.title} by ${item.artist} published in ${item.year}`);
+
+//still need to add number before track name
+showCollection = (collection) => {
+  console.log(collection.length);
+  for (let record of collection) {
+    console.log(
+      `${record.title} by ${record.artist} published in ${record.year}`
+    );
+    if (record.tracks) {
+      for (let track of record.tracks) {
+        console.log(track.name + ": " + track.duration);
+      }
+    }
   }
 };
 
@@ -80,14 +89,29 @@ search = (searchObject) => {
   let matches = [];
 
   if (searchObject) {
-    if (searchObject.artist === undefined || searchObject.year === undefined) {
+    if (
+      searchObject.artist === undefined ||
+      searchObject.year === undefined ||
+      searchObject.trackName === undefined
+    ) {
       return collection;
     }
 
     for (let item of collection) {
+      let isTrackFound = false;
+
+      if (item.tracks) {
+        for (let track of item.tracks) {
+          if (track.name === searchObject.trackName) {
+            isTrackFound = true;
+          }
+        }
+      }
+
       if (
         item.artist === searchObject.artist &&
-        item.year === searchObject.year
+        item.year === searchObject.year &&
+        isTrackFound
       ) {
         matches.push(item);
       }
@@ -98,5 +122,11 @@ search = (searchObject) => {
   }
 };
 
-console.log(search({ artist: "The Beatles", year: 1970 }));
+console.log(
+  search({
+    artist: "Derek and the Dominos",
+    year: 1971,
+    trackName: "I Looked Away",
+  })
+);
 console.log(search());
